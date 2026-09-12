@@ -1,0 +1,56 @@
+test_duplicate_json_keys_rejected (test_package.PackageTests.test_duplicate_json_keys_rejected) ... ok
+test_lookup_known_phrase (test_package.PackageTests.test_lookup_known_phrase) ... ok
+test_lookup_unknown_does_not_invent (test_package.PackageTests.test_lookup_unknown_does_not_invent) ... ok
+test_malformed_json_has_friendly_error (test_package.PackageTests.test_malformed_json_has_friendly_error) ... ok
+test_reject_approval_without_evidence (test_package.PackageTests.test_reject_approval_without_evidence) ... ok
+test_reject_budget_without_reason (test_package.PackageTests.test_reject_budget_without_reason) ... ok
+test_reject_downstream_ready_from_waiting (test_package.PackageTests.test_reject_downstream_ready_from_waiting) ... ok
+test_reject_duplicate_evidence (test_package.PackageTests.test_reject_duplicate_evidence) ... ok
+test_reject_empty_acceptance (test_package.PackageTests.test_reject_empty_acceptance) ... ok
+test_reject_fact_without_evidence (test_package.PackageTests.test_reject_fact_without_evidence) ... ok
+test_reject_forward_dependency (test_package.PackageTests.test_reject_forward_dependency) ... ok
+test_reject_inconsistent_status (test_package.PackageTests.test_reject_inconsistent_status) ... ok
+test_reject_irreversible_assumption (test_package.PackageTests.test_reject_irreversible_assumption) ... ok
+test_reject_missing_deliverable (test_package.PackageTests.test_reject_missing_deliverable) ... ok
+test_reject_missing_evidence (test_package.PackageTests.test_reject_missing_evidence) ... ok
+test_reject_missing_source_file (test_package.PackageTests.test_reject_missing_source_file) ... ok
+test_reject_no_selected_interpretation (test_package.PackageTests.test_reject_no_selected_interpretation) ... ok
+test_reject_path_escape (test_package.PackageTests.test_reject_path_escape) ... ok
+test_reject_question_budget (test_package.PackageTests.test_reject_question_budget) ... ok
+test_reject_request_quote_not_present (test_package.PackageTests.test_reject_request_quote_not_present) ... ok
+test_reject_self_dependency (test_package.PackageTests.test_reject_self_dependency) ... ok
+test_reject_string_boolean (test_package.PackageTests.test_reject_string_boolean) ... ok
+test_reject_two_selected_interpretations (test_package.PackageTests.test_reject_two_selected_interpretations) ... ok
+test_reject_unapproved_gate_ready_task (test_package.PackageTests.test_reject_unapproved_gate_ready_task) ... ok
+test_reject_ungated_waiting_task (test_package.PackageTests.test_reject_ungated_waiting_task) ... ok
+test_reject_unknown_field (test_package.PackageTests.test_reject_unknown_field) ... ok
+test_render_contains_reply_and_stop (test_package.PackageTests.test_render_contains_reply_and_stop) ... ok
+test_required_field (test_package.PackageTests.test_required_field) ... ok
+test_source_quote_validation (test_package.PackageTests.test_source_quote_validation) ... ok
+test_unicode_bom_input (test_package.PackageTests.test_unicode_bom_input) ... ok
+test_valid_blocked_work (test_package.PackageTests.test_valid_blocked_work) ... ok
+test_valid_package (test_package.PackageTests.test_valid_package) ... ok
+test_external_links_and_code_blocks_are_ignored (test_repo.RepoCheckTests.test_external_links_and_code_blocks_are_ignored) ... ok
+test_frontmatter_accepts_current_skill (test_repo.RepoCheckTests.test_frontmatter_accepts_current_skill) ... ok
+test_frontmatter_rejects_bad_name (test_repo.RepoCheckTests.test_frontmatter_rejects_bad_name) ... ok
+test_frontmatter_requires_description (test_repo.RepoCheckTests.test_frontmatter_requires_description) ... ok
+test_local_link_checks_missing_file (test_repo.RepoCheckTests.test_local_link_checks_missing_file) ... ok
+test_reference_style_link_is_checked (test_repo.RepoCheckTests.test_reference_style_link_is_checked) ... ok
+test_relative_link_outside_repo_is_rejected (test_repo.RepoCheckTests.test_relative_link_outside_repo_is_rejected) ... ok
+test_analysis_math (test_tools.DemoTests.test_analysis_math) ... ok
+test_demo_does_not_overwrite_existing_directory (test_tools.DemoTests.test_demo_does_not_overwrite_existing_directory) ... ok
+test_demo_escapes_untrusted_text (test_tools.DemoTests.test_demo_escapes_untrusted_text) ... ok
+test_demo_has_labels_and_eight_sections (test_tools.DemoTests.test_demo_has_labels_and_eight_sections) ... ok
+test_eight_cases_validate_with_sources (test_tools.DemoTests.test_eight_cases_validate_with_sources) ... ok
+test_write_demo_creates_index_and_reports (test_tools.DemoTests.test_write_demo_creates_index_and_reports) ... ok
+test_dry_run_does_not_create (test_tools.InstallTests.test_dry_run_does_not_create) ... ok
+test_install_refuses_overwrite (test_tools.InstallTests.test_install_refuses_overwrite) ... ok
+test_install_requires_correct_folder_name (test_tools.InstallTests.test_install_requires_correct_folder_name) ... ok
+test_install_requires_skill_entrypoint (test_tools.InstallTests.test_install_requires_skill_entrypoint) ... ok
+test_install_runtime_only (test_tools.InstallTests.test_install_runtime_only) ... ok
+test_installed_helper_can_load_its_assets (test_tools.InstallTests.test_installed_helper_can_load_its_assets) ... ok
+
+----------------------------------------------------------------------
+Ran 51 tests in 3.667s
+
+OK

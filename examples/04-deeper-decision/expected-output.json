@@ -1,0 +1,164 @@
+{
+  "schema_version": "1.0",
+  "request": "这个结果再深入一点，别只摆数字。",
+  "task_understanding": "此处缺少的是行动比较，不是更多统计图。沿用已有证据，补上两种下一步做法的条件、代价和检验方式。",
+  "execution_status": "ready",
+  "evidence": [
+    {
+      "id": "E1",
+      "source": "input.request",
+      "quote": "这个结果再深入一点，别只摆数字。"
+    },
+    {
+      "id": "E2",
+      "source": "input.md",
+      "quote": "现稿已经核对数据口径，包含月度漏斗、渠道拆分和样本量说明，负责人没有要求新数据。"
+    },
+    {
+      "id": "E3",
+      "source": "input.md",
+      "quote": "会议的待决策项是先改善线索跟进流程，还是先调整投放对象。"
+    },
+    {
+      "id": "E4",
+      "source": "input.md",
+      "quote": "现稿最后只写建议持续关注，没有比较两项行动的前提、代价和检查办法。"
+    }
+  ],
+  "facts": [
+    {
+      "text": "原话要求，这个结果再深入一点，别只摆数字。",
+      "evidence_ids": [
+        "E1"
+      ]
+    },
+    {
+      "text": "现稿已经核对数据口径，包含月度漏斗、渠道拆分和样本量说明，负责人没有要求新数据。",
+      "evidence_ids": [
+        "E2"
+      ]
+    },
+    {
+      "text": "会议的待决策项是先改善线索跟进流程，还是先调整投放对象。",
+      "evidence_ids": [
+        "E3"
+      ]
+    },
+    {
+      "text": "现稿最后只写建议持续关注，没有比较两项行动的前提、代价和检查办法。",
+      "evidence_ids": [
+        "E4"
+      ]
+    }
+  ],
+  "interpretations": [
+    {
+      "meaning": "从已有分析走到行动选择。",
+      "confidence": "medium",
+      "evidence_ids": [
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "selected": true,
+      "would_change": "若现有结论存在口径错误，先纠错再形成建议。"
+    },
+    {
+      "meaning": "可以继续细分指标，但当前未见新增分析能改变待决定事项的证据。",
+      "confidence": "medium",
+      "evidence_ids": [
+        "E2",
+        "E3"
+      ],
+      "selected": false,
+      "would_change": "只有发现影响选择的明确证据缺口时才补分析。"
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "A1",
+      "text": "建议用一页行动比较补充现稿，不重做整份分析。",
+      "risk": "low",
+      "reversible": true,
+      "check_at": "收到首次反馈时复核。",
+      "fallback": "只调整小稿，不扩大未确认范围。"
+    }
+  ],
+  "question_policy": {
+    "budget": 2,
+    "exception_reason": ""
+  },
+  "clarifications": [],
+  "deliverables": [
+    {
+      "id": "D1",
+      "name": "下一步行动比较",
+      "format": "现稿新增一页比较表",
+      "status": "proposed",
+      "evidence_ids": [],
+      "acceptance": [
+        "比较改善跟进与调整投放的适用前提、资源需求和可观察结果。",
+        "推荐是有条件的，不保证效果。",
+        "明确什么新信息会改变推荐。"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T1",
+      "action": "提取已验证的分析结论与限制。",
+      "deliverable_id": "D1",
+      "depends_on": [],
+      "state": "ready",
+      "acceptance": [
+        "不重复已有图表。"
+      ],
+      "timebox": "建议先完成此步，不承诺未经确认的工时。"
+    },
+    {
+      "id": "T2",
+      "action": "形成两项行动的统一口径比较。",
+      "deliverable_id": "D1",
+      "depends_on": [
+        "T1"
+      ],
+      "state": "ready",
+      "acceptance": [
+        "有适用条件、代价、检验办法和变化条件。"
+      ],
+      "timebox": "建议先完成此步，不承诺未经确认的工时。"
+    },
+    {
+      "id": "T3",
+      "action": "给出有条件的建议。",
+      "deliverable_id": "D1",
+      "depends_on": [
+        "T2"
+      ],
+      "state": "ready",
+      "acceptance": [
+        "听众能基于同一张表判断先做哪一项。"
+      ],
+      "timebox": "建议先完成此步，不承诺未经确认的工时。"
+    }
+  ],
+  "approval_gates": [],
+  "risks": [
+    {
+      "risk": "把深入误解为继续增加分析。",
+      "impact": "交付变长但仍不能支持选择。",
+      "mitigation": "以是否改变行动决定是否补充分析。",
+      "evidence_ids": [
+        "E3",
+        "E4"
+      ]
+    }
+  ],
+  "out_of_scope": [
+    "不重复现有渠道和漏斗图。",
+    "不新增没有决策用途的分析。",
+    "不承诺行动必然提高成交。"
+  ],
+  "reply_draft": "现有分析已经比较完整，我会把重点放到下一步选择上，补一页改善跟进与调整投放的比较，说明各自适用条件和检查办法。没有新的证据缺口就不继续堆图。",
+  "stop_condition": "两项行动的差异和选择条件已经可判断，即停止加图和扩写。"
+}

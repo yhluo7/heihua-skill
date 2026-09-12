@@ -1,0 +1,163 @@
+{
+  "schema_version": "1.0",
+  "request": "你看着办，今天把这几家供应商定下来，不要再问我一堆问题。",
+  "task_understanding": "本轮不追加问题，先整理内部比较和条件缺口。供应商最终确认及对外承诺仍等待明确授权，不能把你看着办当成采购批准。",
+  "execution_status": "partial",
+  "evidence": [
+    {
+      "id": "E1",
+      "source": "input.request",
+      "quote": "你看着办，今天把这几家供应商定下来，不要再问我一堆问题。"
+    },
+    {
+      "id": "E2",
+      "source": "input.md",
+      "quote": "现有三份报价可用于内部比较，但服务范围和交付条件尚不完全可比。"
+    },
+    {
+      "id": "E3",
+      "source": "input.md",
+      "quote": "未提供采购批准记录、最终选择权限或对外确认授权。"
+    },
+    {
+      "id": "E4",
+      "source": "input.md",
+      "quote": "用户目前不方便追加沟通，只需要知道可以先推进哪些工作。"
+    }
+  ],
+  "facts": [
+    {
+      "text": "原话要求，你看着办，今天把这几家供应商定下来，不要再问我一堆问题。",
+      "evidence_ids": [
+        "E1"
+      ]
+    },
+    {
+      "text": "现有三份报价可用于内部比较，但服务范围和交付条件尚不完全可比。",
+      "evidence_ids": [
+        "E2"
+      ]
+    },
+    {
+      "text": "未提供采购批准记录、最终选择权限或对外确认授权。",
+      "evidence_ids": [
+        "E3"
+      ]
+    },
+    {
+      "text": "用户目前不方便追加沟通，只需要知道可以先推进哪些工作。",
+      "evidence_ids": [
+        "E4"
+      ]
+    }
+  ],
+  "interpretations": [
+    {
+      "meaning": "可以自主准备内部选择建议，但不能据此推定最终采购权限。",
+      "confidence": "medium",
+      "evidence_ids": [
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "selected": true,
+      "would_change": "若后续提供明确权限和批准记录，再调整受阻任务状态。"
+    },
+    {
+      "meaning": "原话可能希望当天确定合作方，但缺少执行所需授权。",
+      "confidence": "medium",
+      "evidence_ids": [
+        "E1",
+        "E3"
+      ],
+      "selected": false,
+      "would_change": "仅在授权和不可比条件消除后，才具备后续执行依据。"
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "A1",
+      "text": "暂只使用已有报价做内部比较，不主动联系供应商。",
+      "risk": "low",
+      "reversible": true,
+      "check_at": "收到首次反馈时复核。",
+      "fallback": "只调整小稿，不扩大未确认范围。"
+    }
+  ],
+  "question_policy": {
+    "budget": 0,
+    "exception_reason": ""
+  },
+  "clarifications": [],
+  "deliverables": [
+    {
+      "id": "D1",
+      "name": "供应商内部选择建议",
+      "format": "比较表和待批准事项",
+      "status": "proposed",
+      "evidence_ids": [],
+      "acceptance": [
+        "区分可以比较的报价与尚不可比的条款。",
+        "保留选择权限和最终批准栏为未确认。",
+        "不出现已通知中标或已承诺付款的表述。"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T1",
+      "action": "整理现有报价和不可比条件。",
+      "deliverable_id": "D1",
+      "depends_on": [],
+      "state": "ready",
+      "acceptance": [
+        "比较表不把未知服务范围按相同处理。"
+      ],
+      "timebox": "建议先完成此步，不承诺未经确认的工时。"
+    },
+    {
+      "id": "T2",
+      "action": "依据正式批准结果办理最终确认。",
+      "deliverable_id": "D1",
+      "depends_on": [
+        "T1"
+      ],
+      "state": "waiting",
+      "acceptance": [
+        "只有授权范围和选择结果均有依据时才能进入后续执行。"
+      ],
+      "timebox": "建议先完成此步，不承诺未经确认的工时。"
+    }
+  ],
+  "approval_gates": [
+    {
+      "id": "G1",
+      "reason": "必须取得最终选择与对外确认的明确授权，并核实不可比条件。",
+      "confirmed": false,
+      "evidence_ids": [
+        "E3"
+      ],
+      "blocks": [
+        "T2"
+      ]
+    }
+  ],
+  "risks": [
+    {
+      "risk": "不追问可能被误解为所有条件都已确定。",
+      "impact": "容易形成未经授权的外部承诺。",
+      "mitigation": "零追问与执行门槛分开记录。",
+      "evidence_ids": [
+        "E3",
+        "E4"
+      ]
+    }
+  ],
+  "out_of_scope": [
+    "不发送中标通知。",
+    "不下单、付款或签约。",
+    "不将未回复视为默认批准。"
+  ],
+  "reply_draft": "我先把现有报价按同一口径整理，列出推荐和待确认条件，本轮不再追加一串问题。最终供应商确认和对外承诺先保留在待批准项，授权明确后再推进。",
+  "stop_condition": "内部比较和需要批准的事项已清楚即可，本 Skill 不执行外部确认。"
+}

@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "request": "下个月的线下活动尽快弄个方案，先跑起来。",
+  "task_understanding": "先做可讨论的活动框架，优先确认活动对象。尽快只是紧迫程度，当前没有具体交稿时刻。",
+  "execution_status": "partial",
+  "evidence": [
+    {
+      "id": "E1",
+      "source": "input.request",
+      "quote": "下个月的线下活动尽快弄个方案，先跑起来。"
+    },
+    {
+      "id": "E2",
+      "source": "input.md",
+      "quote": "目前只有一个空白活动模板，尚未确定面向老客户还是新客户。"
+    },
+    {
+      "id": "E3",
+      "source": "input.md",
+      "quote": "可先准备内部讨论稿，没有活动预算、场地或对外发布授权。"
+    }
+  ],
+  "facts": [
+    {
+      "text": "原话要求，下个月的线下活动尽快弄个方案，先跑起来。",
+      "evidence_ids": [
+        "E1"
+      ]
+    },
+    {
+      "text": "目前只有一个空白活动模板，尚未确定面向老客户还是新客户。",
+      "evidence_ids": [
+        "E2"
+      ]
+    },
+    {
+      "text": "可先准备内部讨论稿，没有活动预算、场地或对外发布授权。",
+      "evidence_ids": [
+        "E3"
+      ]
+    }
+  ],
+  "interpretations": [
+    {
+      "meaning": "先确定活动对象，再决定流程与宣传方式。",
+      "confidence": "medium",
+      "evidence_ids": [
+        "E2"
+      ],
+      "selected": true,
+      "would_change": "若上级已在其他授权材料中确定活动对象，应直接使用该依据。"
+    },
+    {
+      "meaning": "先跑起来可能指马上宣传，但当前没有外部发布授权。",
+      "confidence": "medium",
+      "evidence_ids": [
+        "E3"
+      ],
+      "selected": false,
+      "would_change": "只有获得对象、资源和发布授权后才列入可执行范围。"
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "A1",
+      "text": "暂用一页内部讨论稿比较老客户活动与新客户活动，不承诺具体活动日期。",
+      "risk": "low",
+      "reversible": true,
+      "check_at": "收到首次反馈时复核。",
+      "fallback": "只调整小稿，不扩大未确认范围。"
+    }
+  ],
+  "question_policy": {
+    "budget": 2,
+    "exception_reason": ""
+  },
+  "clarifications": [
+    {
+      "id": "Q1",
+      "question": "这次主要面向老客户维护，还是新客户拓展。",
+      "why_needed": "两种对象会改变目标、流程和宣传方式。",
+      "changes": "决定哪一套活动框架继续展开。",
+      "if_no_answer": "先给两种简版选项，不做对外宣传。",
+      "blocks": [
+        "T2"
+      ]
+    }
+  ],
+  "deliverables": [
+    {
+      "id": "D1",
+      "name": "活动方向讨论稿",
+      "format": "一页文字或表格",
+      "status": "proposed",
+      "evidence_ids": [],
+      "acceptance": [
+        "把老客户与新客户两种方向的目标、最低流程和资源缺口分开。",
+        "不把待定预算、场地和人员填成已落实。"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T1",
+      "action": "整理已知限制和两种对象的活动框架。",
+      "deliverable_id": "D1",
+      "depends_on": [],
+      "state": "ready",
+      "acceptance": [
+        "无需活动对象最终确定也可完成两个简短选项。"
+      ],
+      "timebox": "建议先完成此步，不承诺未经确认的工时。"
+    },
+    {
+      "id": "T2",
+      "action": "围绕选定对象展开流程。",
+      "deliverable_id": "D1",
+      "depends_on": [
+        "T1"
+      ],
+      "state": "waiting",
+      "acceptance": [
+        "活动对象获得确认，流程与该对象一致。"
+      ],
+      "timebox": "建议先完成此步，不承诺未经确认的工时。"
+    }
+  ],
+  "approval_gates": [],
+  "risks": [
+    {
+      "risk": "没有明确交稿时刻。",
+      "impact": "回复中容易无依据承诺今晚完成。",
+      "mitigation": "先交轻量讨论稿，具体节点另行确认。",
+      "evidence_ids": []
+    }
+  ],
+  "out_of_scope": [
+    "不擅自订场地。",
+    "不邀请客户或发布活动。",
+    "不虚构预算和今晚交稿承诺。"
+  ],
+  "reply_draft": "我先整理一页活动方向稿，把基本流程和待确认资源列出来。活动主要面向老客户维护，还是新客户拓展。对象确定前，我先保留两种简版选项，不做对外发布。",
+  "stop_condition": "形成足以选择活动对象和继续方向的讨论稿即可，不提前扩成全套执行文件。"
+}

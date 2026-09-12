@@ -1,0 +1,9 @@
+PASS，8 个合成参考示例，未调用模型。
+{
+  "lead_growth_percent": "44.0",
+  "order_growth_percent": "8.0",
+  "old_lead_conversion_percent": "10.0",
+  "new_lead_conversion_percent": "7.5",
+  "conversion_change_percentage_points": "-2.5",
+  "note": "仅核对模拟 CSV 的算术，不验证行为推断或因果解释。"
+}

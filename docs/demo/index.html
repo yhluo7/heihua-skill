@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>heihua-skill · 办公任务解码演示</title><style>
+:root{--ink:#172c2b;--muted:#64736f;--paper:#f4f6f2;--card:#fff;--line:#dce4dd;--accent:#22614e;--warm:#f4ead9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.75 system-ui,-apple-system,"Segoe UI","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+aside{position:fixed;inset:0 auto 0 0;width:252px;padding:34px 22px;background:var(--ink);color:#ecf5ed;overflow:auto}
+.brand{font-size:23px;font-weight:750;letter-spacing:-.5px}.subbrand{font-size:12px;color:#b2c9be;margin:5px 0 28px}nav a{display:block;text-decoration:none;color:#d4e3da;padding:12px 10px;border-radius:7px;margin:3px 0;font-size:13px}nav a:hover,nav a:focus{background:#29413b;color:white}.navnum{font-size:11px;opacity:.7;display:block;letter-spacing:2px}.sidefoot{font-size:12px;border-top:1px solid #456056;margin-top:25px;padding-top:20px;color:#b2c9be}
+main{margin-left:252px;padding:48px 48px 80px;max-width:1510px}.eyebrow{font-size:12px;letter-spacing:2px;color:var(--accent);font-weight:750}h1{font-size:42px;line-height:1.3;letter-spacing:-1.5px;margin:12px 0 16px}header p{max-width:790px;color:var(--muted);margin:0 0 20px}.chips{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0 24px}.chip{background:#e4ece4;padding:5px 11px;border-radius:5px;font-size:12px}.notice{border-left:3px solid var(--accent);padding:13px 17px;background:#eaf0e8;font-size:13px;max-width:1040px}
+.case{scroll-margin-top:24px;margin-top:46px;border-top:1px solid var(--line);padding-top:30px}.casetop{display:flex;align-items:baseline;gap:17px}.case-number{color:var(--accent);font-size:15px;letter-spacing:2px;font-weight:750}h2{font-size:26px;line-height:1.4;margin:0 0 10px}.highlight{color:var(--muted);font-size:14px;margin:0 0 19px}.grid{display:grid;grid-template-columns:minmax(280px,.85fr) minmax(360px,1.15fr);gap:20px}.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px}.panel-input{background:#eaf0e8}.label{font-size:12px;letter-spacing:1px;font-weight:750;color:var(--accent);margin-bottom:14px}.quote{font-size:23px;line-height:1.65;font-weight:600;margin:0 0 24px}.context-label{font-size:13px;font-weight:700}.context{padding-left:20px;margin:8px 0;color:#4a6058;font-size:13px}.context li{margin:8px 0}.understanding{font-size:17px;line-height:1.85;margin:0 0 18px}.status{display:inline-block;border:1px solid #bbd4c4;background:#f4f8f2;border-radius:5px;padding:4px 10px;font-size:12px;margin-bottom:15px}.metricrow{display:flex;gap:8px;flex-wrap:wrap;font-size:12px}.metric{padding:3px 9px;background:#edf1ed;border-radius:4px}.smalltitle{font-size:13px;font-weight:750;margin:19px 0 6px}.compact{padding-left:19px;margin:8px 0;font-size:14px}.compact li{margin:7px 0}.reply{background:var(--ink);color:#f3f8f3;padding:22px 26px;border-radius:10px;margin-top:18px}.reply .label{color:#bbd8c8;margin-bottom:8px}.reply p{margin:0;font-size:15px;line-height:1.95}.stop{padding:14px 0 0;font-size:13px;color:#53655e}details{margin-top:17px;background:#fff;border:1px solid var(--line);border-radius:8px}summary{cursor:pointer;padding:13px 18px;color:var(--accent);font-size:13px;font-weight:650}pre{white-space:pre-wrap;word-break:break-word;padding:0 20px 20px;line-height:1.8;font-size:13px;font-family:inherit;margin:0}footer{margin-top:50px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}a:focus-visible,summary:focus-visible{outline:3px solid #99bbaa;outline-offset:3px}
+@media(max-width:1050px){aside{width:210px;padding:25px 16px}main{margin-left:210px;padding:32px 25px}.grid{grid-template-columns:1fr}h1{font-size:34px}}
+@media(max-width:680px){aside{position:static;width:auto;padding:20px}nav{display:flex;overflow:auto;gap:5px}nav a{min-width:170px}.sidefoot,.subbrand{display:none}main{margin:0;padding:28px 18px}h1{font-size:30px}.panel{padding:20px}.quote{font-size:21px}.casetop{gap:10px}h2{font-size:22px}}
+@media print{aside{display:none}main{margin:0;padding:0}.case{break-before:page}.grid{grid-template-columns:1fr 1fr}.reply{background:white;color:black;border:1px solid #aaa}details{display:none}}
+</style></head><body><aside><div class="brand">heihua-skill</div><div class="subbrand">把模糊要求变成可开工的任务</div><nav aria-label="案例导航"><a href="#01-report-ready"><span class="navnum">01 / 08</span>把能汇报转换成决策材料</a><a href="#02-fast-proposal"><span class="navnum">02 / 08</span>尽快不自动变成今晚交付</a><a href="#03-deeper-analysis"><span class="navnum">03 / 08</span>同一句深入，先查转化环节</a><a href="#04-deeper-decision"><span class="navnum">04 / 08</span>同一句深入，不再增加图表</a><a href="#05-approval-boundary"><span class="navnum">05 / 08</span>你看着办，不等于可以直接采购</a><a href="#06-honest-presentation"><span class="navnum">06 / 08</span>写得好看，不改事实</a><a href="#07-missing-object"><span class="navnum">07 / 08</span>只给一句话，先确认对象</a><a href="#08-impossible-scope"><span class="navnum">08 / 08</span>时限与范围冲突，先给取舍</a></nav><div class="sidefoot">第10类 · 超级个体进化营<br>v0.1.0 · 2026年9月12日<br>纯本地展示，无外部资源。</div></aside><main>
+<header><div class="eyebrow">办公任务解码 · 可复用工作流</div><h1>先弄清要交什么，<br>再开始干。</h1><p>不把再完善一下翻译成无限加内容。先查已有信息，再确定最小交付、必要问题和不能越过的边界。</p>
+<div class="chips"><span class="chip">60条候选情景规则</span><span class="chip">8个办公案例</span><span class="chip">事实与假设分开</span><span class="chip">只问影响行动的问题</span></div>
+<div class="notice">这是合成参考示例，数据与场景均为模拟。此页面重放仓库中的参考工作包，不调用模型，不代表真实用户效果或竞品对测结果。</div></header>
+<section class="case" id="01-report-ready">
+<div class="casetop"><span class="case-number">01</span><h2>把能汇报转换成决策材料</h2></div>
+<p class="highlight">已有上下文足够，本轮零追问。页数是建议，扩大试点没有被当成已获批。</p>
+<div class="grid"><div class="panel panel-input"><div class="label">输入 · 上级原话</div>
+<p class="quote">这个方案你再完善一下，周五给我一个能汇报的版本。别铺太大，先把重点抓出来。</p><div class="context-label">已经知道的事</div><ul class="context"><li>周五是内部运营例会，本次发言安排为10分钟。</li><li>会议需要决定，下个月把试点从2个门店扩大到5个门店，还是继续保留2个门店。</li><li>已有12页方案，包含背景、执行经过和逐店数据，缺少两种选择的比较与建议。</li><li>原方案仍是讨论稿，没有扩大试点的批准记录。</li></ul></div>
+<div class="panel"><div class="label">输出 · 可以交接的工作包</div><span class="status">可先开工</span>
+<p class="understanding">沿用已有数据，补两种试点范围的比较和建议，形成服务周五例会的内部汇报材料，不把完善理解为继续加背景或已经获批扩张。</p>
+<div class="metricrow"><span class="metric">必要问题 0 个</span><span class="metric">无外部阻塞任务 3 项</span><span class="metric">待授权门槛 0 项</span></div>
+<div class="smalltitle">先交什么</div><ul class="compact"><li>试点范围决策汇报稿，沿用原幻灯片，建议5页左右加附件。建议，未确认。</li></ul>
+<div class="smalltitle">需要确认什么</div><ul class="compact"><li>本轮不追加问题，不代表审批门槛已经解除。</li></ul>
+<div class="smalltitle">这次不做什么</div><ul class="compact"><li>不增加没有决策用途的行业背景。</li><li>不重新收集全量数据。</li><li>不对外宣布扩大门店，也不代发汇报材料。</li></ul></div></div>
+<div class="reply"><div class="label">可以复制的回复草稿 · 不会自动发送</div><p>我会沿用现有数据，重点补上继续2店和扩大5店的比较与建议，把材料改成便于周五例会讨论的版本。页数先适当压缩，详细数据保留在附件，扩大试点仍作为待决定事项。</p></div>
+<div class="stop"><strong>做到这里就停。</strong>材料已经能让例会在两种范围之间作出判断，关键依据和限制清楚，即停止扩写。</div>
+<details><summary>查看完整工作包，包括假设、任务依赖与依据</summary><pre># heihua-skill 工作包
+
+## 我理解的任务
+
+沿用已有数据，补两种试点范围的比较和建议，形成服务周五例会的内部汇报材料，不把完善理解为继续加背景或已经获批扩张。
+
+当前状态，可先开工。
+
+## 已明确的信息
+
+- 原话要求，这个方案你再完善一下，周五给我一个能汇报的版本。别铺太大，先把重点抓出来。 依据 E1。
+- 周五是内部运营例会，本次发言安排为10分钟。 依据 E2。
+- 会议需要决定，下个月把试点从2个门店扩大到5个门店，还是继续保留2个门店。 依据 E3。
+- 已有12页方案，包含背景、执行经过和逐店数据，缺少两种选择的比较与建议。 依据 E4。
+- 原方案仍是讨论稿，没有扩大试点的批准记录。 依据 E5。
+
+## 候选解释
+
+- 暂按此推进，优先补决策比较，而不是把12页继续写长。 置信程度中等。
+  改变条件，若会议改为单纯进度同步，应改成进展与问题汇总。
+- 保留的其他解释，也可能只要求改善表达，但现稿明确缺少决策比较。 置信程度中等。
+  改变条件，只有收到仅改排版的明确反馈才只做表达修改。
+
+## 默认假设
+
+- A1，建议压成5页左右并保留附件，这是建议页数，不是上级已提出的要求。
+  复核节点，收到首次反馈时复核。 退路，若需沿用12页模板，只调整内容顺序。
+
+## 预计交付物与验收
+
+### D1 试点范围决策汇报稿
+
+形式，沿用原幻灯片，建议5页左右加附件。建议，尚未确认。
+- 开头说明本次需要决定的事项。
+- 比较继续2店与扩大5店的证据、资源缺口和风险。
+- 给出有条件的建议，未获批事项明确标为待决定。
+- 所有关键数字能找到已有逐店数据来源。
+
+## 执行顺序
+
+### T1 核对现稿与逐店数据中的关键口径。
+
+状态，可执行。依赖，无。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，重点数字和来源一一对应。
+
+### T2 补充2店与5店的选择比较。
+
+状态，可执行。依赖，T1。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，比较使用相同维度，不编造新增资源与预期收益。
+
+### T3 重排汇报主线并保留必要附件。
+
+状态，可执行。依赖，T2。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，10分钟内能讲清要决定什么，页数仍标为建议。
+
+## 需要确认的最少问题
+
+本轮不追加问题。不代表待审批事项已经获批。
+
+## 返工风险
+
+- 再完善不代表现有方案已经获批。 影响，可能误把讨论稿变为执行通知。 处理，只交决策稿，不宣布扩大试点。
+
+## 本轮不做
+
+- 不增加没有决策用途的行业背景。
+- 不重新收集全量数据。
+- 不对外宣布扩大门店，也不代发汇报材料。
+
+## 给上级的回复草稿
+
+我会沿用现有数据，重点补上继续2店和扩大5店的比较与建议，把材料改成便于周五例会讨论的版本。页数先适当压缩，详细数据保留在附件，扩大试点仍作为待决定事项。
+
+## 做到这里就停
+
+材料已经能让例会在两种范围之间作出判断，关键依据和限制清楚，即停止扩写。
+
+## 依据索引
+
+- E1，input.request
+  原文片段，这个方案你再完善一下，周五给我一个能汇报的版本。别铺太大，先把重点抓出来。
+- E2，input.md
+  原文片段，周五是内部运营例会，本次发言安排为10分钟。
+- E3，input.md
+  原文片段，会议需要决定，下个月把试点从2个门店扩大到5个门店，还是继续保留2个门店。
+- E4，input.md
+  原文片段，已有12页方案，包含背景、执行经过和逐店数据，缺少两种选择的比较与建议。
+- E5，input.md
+  原文片段，原方案仍是讨论稿，没有扩大试点的批准记录。
+
+此工作包不代表负责人已批准，不会自动发送消息或执行所列任务。
+</pre></details>
+<details><summary>查看完整模拟输入</summary><pre># 把能汇报转换成决策材料
+
+全模拟案例，不含真实单位、个人或客户资料。
+
+## 上级原话
+
+这个方案你再完善一下，周五给我一个能汇报的版本。别铺太大，先把重点抓出来。
+
+## 已有上下文
+
+周五是内部运营例会，本次发言安排为10分钟。
+
+会议需要决定，下个月把试点从2个门店扩大到5个门店，还是继续保留2个门店。
+
+已有12页方案，包含背景、执行经过和逐店数据，缺少两种选择的比较与建议。
+
+原方案仍是讨论稿，没有扩大试点的批准记录。
+</pre></details>
+</section><section class="case" id="02-fast-proposal">
+<div class="casetop"><span class="case-number">02</span><h2>尽快不自动变成今晚交付</h2></div>
+<p class="highlight">一个方向问题，准备工作不中断，正式流程等待对象确认。</p>
+<div class="grid"><div class="panel panel-input"><div class="label">输入 · 上级原话</div>
+<p class="quote">下个月的线下活动尽快弄个方案，先跑起来。</p><div class="context-label">已经知道的事</div><ul class="context"><li>目前只有一个空白活动模板，尚未确定面向老客户还是新客户。</li><li>可先准备内部讨论稿，没有活动预算、场地或对外发布授权。</li></ul></div>
+<div class="panel"><div class="label">输出 · 可以交接的工作包</div><span class="status">部分可开工，部分等待</span>
+<p class="understanding">先做可讨论的活动框架，优先确认活动对象。尽快只是紧迫程度，当前没有具体交稿时刻。</p>
+<div class="metricrow"><span class="metric">必要问题 1 个</span><span class="metric">无外部阻塞任务 1 项</span><span class="metric">待授权门槛 0 项</span></div>
+<div class="smalltitle">先交什么</div><ul class="compact"><li>活动方向讨论稿，一页文字或表格。建议，未确认。</li></ul>
+<div class="smalltitle">需要确认什么</div><ul class="compact"><li>这次主要面向老客户维护，还是新客户拓展。</li></ul>
+<div class="smalltitle">这次不做什么</div><ul class="compact"><li>不擅自订场地。</li><li>不邀请客户或发布活动。</li><li>不虚构预算和今晚交稿承诺。</li></ul></div></div>
+<div class="reply"><div class="label">可以复制的回复草稿 · 不会自动发送</div><p>我先整理一页活动方向稿，把基本流程和待确认资源列出来。活动主要面向老客户维护，还是新客户拓展。对象确定前，我先保留两种简版选项，不做对外发布。</p></div>
+<div class="stop"><strong>做到这里就停。</strong>形成足以选择活动对象和继续方向的讨论稿即可，不提前扩成全套执行文件。</div>
+<details><summary>查看完整工作包，包括假设、任务依赖与依据</summary><pre># heihua-skill 工作包
+
+## 我理解的任务
+
+先做可讨论的活动框架，优先确认活动对象。尽快只是紧迫程度，当前没有具体交稿时刻。
+
+当前状态，部分可开工，部分等待确认。
+
+## 已明确的信息
+
+- 原话要求，下个月的线下活动尽快弄个方案，先跑起来。 依据 E1。
+- 目前只有一个空白活动模板，尚未确定面向老客户还是新客户。 依据 E2。
+- 可先准备内部讨论稿，没有活动预算、场地或对外发布授权。 依据 E3。
+
+## 候选解释
+
+- 暂按此推进，先确定活动对象，再决定流程与宣传方式。 置信程度中等。
+  改变条件，若上级已在其他授权材料中确定活动对象，应直接使用该依据。
+- 保留的其他解释，先跑起来可能指马上宣传，但当前没有外部发布授权。 置信程度中等。
+  改变条件，只有获得对象、资源和发布授权后才列入可执行范围。
+
+## 默认假设
+
+- A1，暂用一页内部讨论稿比较老客户活动与新客户活动，不承诺具体活动日期。
+  复核节点，收到首次反馈时复核。 退路，只调整小稿，不扩大未确认范围。
+
+## 预计交付物与验收
+
+### D1 活动方向讨论稿
+
+形式，一页文字或表格。建议，尚未确认。
+- 把老客户与新客户两种方向的目标、最低流程和资源缺口分开。
+- 不把待定预算、场地和人员填成已落实。
+
+## 执行顺序
+
+### T1 整理已知限制和两种对象的活动框架。
+
+状态，可执行。依赖，无。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，无需活动对象最终确定也可完成两个简短选项。
+
+### T2 围绕选定对象展开流程。
+
+状态，待确认后执行。依赖，T1。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，活动对象获得确认，流程与该对象一致。
+
+## 需要确认的最少问题
+
+- Q1，这次主要面向老客户维护，还是新客户拓展。
+  为什么问，两种对象会改变目标、流程和宣传方式。
+  答案会改变，决定哪一套活动框架继续展开。
+  暂无回复时，先给两种简版选项，不做对外宣传。
+
+## 返工风险
+
+- 没有明确交稿时刻。 影响，回复中容易无依据承诺今晚完成。 处理，先交轻量讨论稿，具体节点另行确认。
+
+## 本轮不做
+
+- 不擅自订场地。
+- 不邀请客户或发布活动。
+- 不虚构预算和今晚交稿承诺。
+
+## 给上级的回复草稿
+
+我先整理一页活动方向稿，把基本流程和待确认资源列出来。活动主要面向老客户维护，还是新客户拓展。对象确定前，我先保留两种简版选项，不做对外发布。
+
+## 做到这里就停
+
+形成足以选择活动对象和继续方向的讨论稿即可，不提前扩成全套执行文件。
+
+## 依据索引
+
+- E1，input.request
+  原文片段，下个月的线下活动尽快弄个方案，先跑起来。
+- E2，input.md
+  原文片段，目前只有一个空白活动模板，尚未确定面向老客户还是新客户。
+- E3，input.md
+  原文片段，可先准备内部讨论稿，没有活动预算、场地或对外发布授权。
+
+此工作包不代表负责人已批准，不会自动发送消息或执行所列任务。
+</pre></details>
+<details><summary>查看完整模拟输入</summary><pre># 尽快不自动变成今晚交付
+
+全模拟案例，不含真实单位、个人或客户资料。
+
+## 上级原话
+
+下个月的线下活动尽快弄个方案，先跑起来。
+
+## 已有上下文
+
+目前只有一个空白活动模板，尚未确定面向老客户还是新客户。
+
+可先准备内部讨论稿，没有活动预算、场地或对外发布授权。
+</pre></details>
+</section><section class="case" id="03-deeper-analysis">
+<div class="casetop"><span class="case-number">03</span><h2>同一句深入，先查转化环节</h2></div>
+<p class="highlight">同一句再深入一点，缺口是分析口径。脚本可独立复核这里的示例算术。</p>
+<div class="grid"><div class="panel panel-input"><div class="label">输入 · 上级原话</div>
+<p class="quote">这个结果再深入一点，别只摆数字。</p><div class="context-label">已经知道的事</div><ul class="context"><li>当前只有7月与8月线索量的柱状图，汇报用于决定下个月先改善哪个销售环节。</li><li>metrics.csv 是本案例的全模拟汇总数据，线索和成交口径保持一致，没有渠道明细和因果识别资料。</li><li>按模拟数据计算，线索增长44.0%，成交增长8.0%。</li><li>按模拟数据计算，线索到成交转化率由10.0%降到7.5%，变化为负2.5个百分点。</li></ul></div>
+<div class="panel"><div class="label">输出 · 可以交接的工作包</div><span class="status">可先开工</span>
+<p class="understanding">先把线索增长与成交转化分开，定位现稿遗漏的销售环节。不因为深入就追加无法获得的渠道细分或宣称原因已经证实。</p>
+<div class="metricrow"><span class="metric">必要问题 0 个</span><span class="metric">无外部阻塞任务 3 项</span><span class="metric">待授权门槛 0 项</span></div>
+<div class="smalltitle">先交什么</div><ul class="compact"><li>漏斗变化与下一步检查简报，一页比较表加判断。建议，未确认。</li></ul>
+<div class="smalltitle">需要确认什么</div><ul class="compact"><li>本轮不追加问题，不代表审批门槛已经解除。</li></ul>
+<div class="smalltitle">这次不做什么</div><ul class="compact"><li>不在没有渠道数据时编造渠道差异。</li><li>不把转化下降直接解释为员工努力不足。</li><li>不为显得深入而追加复杂模型。</li></ul></div></div>
+<div class="reply"><div class="label">可以复制的回复草稿 · 不会自动发送</div><p>我先补上线索到成交的转化比较。目前模拟数据里线索增长44.0%，成交只增长8.0%，转化率从10.0%降到7.5%。这说明只展示线索增长不够，我会把优先核查的环节和证据限制写清楚，暂不下原因结论。</p></div>
+<div class="stop"><strong>做到这里就停。</strong>已清楚指出现稿遗漏的转化环节及下一步核查方向即可，不在缺数据时无限细分。</div>
+<details><summary>查看完整工作包，包括假设、任务依赖与依据</summary><pre># heihua-skill 工作包
+
+## 我理解的任务
+
+先把线索增长与成交转化分开，定位现稿遗漏的销售环节。不因为深入就追加无法获得的渠道细分或宣称原因已经证实。
+
+当前状态，可先开工。
+
+## 已明确的信息
+
+- 原话要求，这个结果再深入一点，别只摆数字。 依据 E1。
+- 当前只有7月与8月线索量的柱状图，汇报用于决定下个月先改善哪个销售环节。 依据 E2。
+- metrics.csv 是本案例的全模拟汇总数据，线索和成交口径保持一致，没有渠道明细和因果识别资料。 依据 E3。
+- 按模拟数据计算，线索增长44.0%，成交增长8.0%。 依据 E4，E5。
+- 按模拟数据计算，线索到成交转化率由10.0%降到7.5%，变化为负2.5个百分点。 依据 E4，E5。
+
+## 候选解释
+
+- 暂按此推进，现有图表缺少转化口径，优先补漏斗比较。 置信程度中等。
+  改变条件，若已有完整漏斗分析，则转向行动选择而非重复计算。
+- 保留的其他解释，也可能需要解释因果原因，但现有汇总数据不够。 置信程度中等。
+  改变条件，只有获得相应设计和资料后才能提高原因判断的强度。
+
+## 默认假设
+
+- A1，先用现有两个月汇总做描述性核对，不提出未经授权的新数据收集。
+  复核节点，收到首次反馈时复核。 退路，只调整小稿，不扩大未确认范围。
+
+## 预计交付物与验收
+
+### D1 漏斗变化与下一步检查简报
+
+形式，一页比较表加判断。建议，尚未确认。
+- 同时展示线索量、成交量、转化率和比较基数。
+- 区分已观察到的变化与尚未证实的原因。
+- 明确下一步只核查最可能影响转化的环节，不泛列新分析。
+
+## 执行顺序
+
+### T1 复核两个月的线索和成交口径。
+
+状态，可执行。依赖，无。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，核对原始行后再比较比例。
+
+### T2 补充成交转化率与变化。
+
+状态，可执行。依赖，T1。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，转化率从10.0%到7.5%，下降2.5个百分点，不能写成下降2.5%。
+
+### T3 把变化改写成需要优先核查的环节。
+
+状态，可执行。依赖，T2。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，说明线索增加未带来同比例成交增加，不断言原因。
+
+## 需要确认的最少问题
+
+本轮不追加问题。不代表待审批事项已经获批。
+
+## 返工风险
+
+- 现有汇总无法证明转化下降的具体原因。 影响，可能错误归责给销售或渠道。 处理，只列需要验证的解释，不给确定归因。
+
+## 本轮不做
+
+- 不在没有渠道数据时编造渠道差异。
+- 不把转化下降直接解释为员工努力不足。
+- 不为显得深入而追加复杂模型。
+
+## 给上级的回复草稿
+
+我先补上线索到成交的转化比较。目前模拟数据里线索增长44.0%，成交只增长8.0%，转化率从10.0%降到7.5%。这说明只展示线索增长不够，我会把优先核查的环节和证据限制写清楚，暂不下原因结论。
+
+## 做到这里就停
+
+已清楚指出现稿遗漏的转化环节及下一步核查方向即可，不在缺数据时无限细分。
+
+## 依据索引
+
+- E1，input.request
+  原文片段，这个结果再深入一点，别只摆数字。
+- E2，input.md
+  原文片段，当前只有7月与8月线索量的柱状图，汇报用于决定下个月先改善哪个销售环节。
+- E3，input.md
+  原文片段，metrics.csv 是本案例的全模拟汇总数据，线索和成交口径保持一致，没有渠道明细和因果识别资料。
+- E4，metrics.csv
+  原文片段，2026-07,500,50
+- E5，metrics.csv
+  原文片段，2026-08,720,54
+
+此工作包不代表负责人已批准，不会自动发送消息或执行所列任务。
+</pre></details>
+<details><summary>查看完整模拟输入</summary><pre># 同一句深入，先查转化环节
+
+全模拟案例，不含真实单位、个人或客户资料。
+
+## 上级原话
+
+这个结果再深入一点，别只摆数字。
+
+## 已有上下文
+
+当前只有7月与8月线索量的柱状图，汇报用于决定下个月先改善哪个销售环节。
+
+metrics.csv 是本案例的全模拟汇总数据，线索和成交口径保持一致，没有渠道明细和因果识别资料。
+
+## 同目录材料
+
+metrics.csv
+</pre></details>
+</section><section class="case" id="04-deeper-decision">
+<div class="casetop"><span class="case-number">04</span><h2>同一句深入，不再增加图表</h2></div>
+<p class="highlight">与上个案例的原话完全相同，交付从漏斗核对变为行动比较。</p>
+<div class="grid"><div class="panel panel-input"><div class="label">输入 · 上级原话</div>
+<p class="quote">这个结果再深入一点，别只摆数字。</p><div class="context-label">已经知道的事</div><ul class="context"><li>现稿已经核对数据口径，包含月度漏斗、渠道拆分和样本量说明，负责人没有要求新数据。</li><li>会议的待决策项是先改善线索跟进流程，还是先调整投放对象。</li><li>现稿最后只写建议持续关注，没有比较两项行动的前提、代价和检查办法。</li></ul></div>
+<div class="panel"><div class="label">输出 · 可以交接的工作包</div><span class="status">可先开工</span>
+<p class="understanding">此处缺少的是行动比较，不是更多统计图。沿用已有证据，补上两种下一步做法的条件、代价和检验方式。</p>
+<div class="metricrow"><span class="metric">必要问题 0 个</span><span class="metric">无外部阻塞任务 3 项</span><span class="metric">待授权门槛 0 项</span></div>
+<div class="smalltitle">先交什么</div><ul class="compact"><li>下一步行动比较，现稿新增一页比较表。建议，未确认。</li></ul>
+<div class="smalltitle">需要确认什么</div><ul class="compact"><li>本轮不追加问题，不代表审批门槛已经解除。</li></ul>
+<div class="smalltitle">这次不做什么</div><ul class="compact"><li>不重复现有渠道和漏斗图。</li><li>不新增没有决策用途的分析。</li><li>不承诺行动必然提高成交。</li></ul></div></div>
+<div class="reply"><div class="label">可以复制的回复草稿 · 不会自动发送</div><p>现有分析已经比较完整，我会把重点放到下一步选择上，补一页改善跟进与调整投放的比较，说明各自适用条件和检查办法。没有新的证据缺口就不继续堆图。</p></div>
+<div class="stop"><strong>做到这里就停。</strong>两项行动的差异和选择条件已经可判断，即停止加图和扩写。</div>
+<details><summary>查看完整工作包，包括假设、任务依赖与依据</summary><pre># heihua-skill 工作包
+
+## 我理解的任务
+
+此处缺少的是行动比较，不是更多统计图。沿用已有证据，补上两种下一步做法的条件、代价和检验方式。
+
+当前状态，可先开工。
+
+## 已明确的信息
+
+- 原话要求，这个结果再深入一点，别只摆数字。 依据 E1。
+- 现稿已经核对数据口径，包含月度漏斗、渠道拆分和样本量说明，负责人没有要求新数据。 依据 E2。
+- 会议的待决策项是先改善线索跟进流程，还是先调整投放对象。 依据 E3。
+- 现稿最后只写建议持续关注，没有比较两项行动的前提、代价和检查办法。 依据 E4。
+
+## 候选解释
+
+- 暂按此推进，从已有分析走到行动选择。 置信程度中等。
+  改变条件，若现有结论存在口径错误，先纠错再形成建议。
+- 保留的其他解释，可以继续细分指标，但当前未见新增分析能改变待决定事项的证据。 置信程度中等。
+  改变条件，只有发现影响选择的明确证据缺口时才补分析。
+
+## 默认假设
+
+- A1，建议用一页行动比较补充现稿，不重做整份分析。
+  复核节点，收到首次反馈时复核。 退路，只调整小稿，不扩大未确认范围。
+
+## 预计交付物与验收
+
+### D1 下一步行动比较
+
+形式，现稿新增一页比较表。建议，尚未确认。
+- 比较改善跟进与调整投放的适用前提、资源需求和可观察结果。
+- 推荐是有条件的，不保证效果。
+- 明确什么新信息会改变推荐。
+
+## 执行顺序
+
+### T1 提取已验证的分析结论与限制。
+
+状态，可执行。依赖，无。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，不重复已有图表。
+
+### T2 形成两项行动的统一口径比较。
+
+状态，可执行。依赖，T1。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，有适用条件、代价、检验办法和变化条件。
+
+### T3 给出有条件的建议。
+
+状态，可执行。依赖，T2。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，听众能基于同一张表判断先做哪一项。
+
+## 需要确认的最少问题
+
+本轮不追加问题。不代表待审批事项已经获批。
+
+## 返工风险
+
+- 把深入误解为继续增加分析。 影响，交付变长但仍不能支持选择。 处理，以是否改变行动决定是否补充分析。
+
+## 本轮不做
+
+- 不重复现有渠道和漏斗图。
+- 不新增没有决策用途的分析。
+- 不承诺行动必然提高成交。
+
+## 给上级的回复草稿
+
+现有分析已经比较完整，我会把重点放到下一步选择上，补一页改善跟进与调整投放的比较，说明各自适用条件和检查办法。没有新的证据缺口就不继续堆图。
+
+## 做到这里就停
+
+两项行动的差异和选择条件已经可判断，即停止加图和扩写。
+
+## 依据索引
+
+- E1，input.request
+  原文片段，这个结果再深入一点，别只摆数字。
+- E2，input.md
+  原文片段，现稿已经核对数据口径，包含月度漏斗、渠道拆分和样本量说明，负责人没有要求新数据。
+- E3，input.md
+  原文片段，会议的待决策项是先改善线索跟进流程，还是先调整投放对象。
+- E4，input.md
+  原文片段，现稿最后只写建议持续关注，没有比较两项行动的前提、代价和检查办法。
+
+此工作包不代表负责人已批准，不会自动发送消息或执行所列任务。
+</pre></details>
+<details><summary>查看完整模拟输入</summary><pre># 同一句深入，不再增加图表
+
+全模拟案例，不含真实单位、个人或客户资料。
+
+## 上级原话
+
+这个结果再深入一点，别只摆数字。
+
+## 已有上下文
+
+现稿已经核对数据口径，包含月度漏斗、渠道拆分和样本量说明，负责人没有要求新数据。
+
+会议的待决策项是先改善线索跟进流程，还是先调整投放对象。
+
+现稿最后只写建议持续关注，没有比较两项行动的前提、代价和检查办法。
+</pre></details>
+</section><section class="case" id="05-approval-boundary">
+<div class="casetop"><span class="case-number">05</span><h2>你看着办，不等于可以直接采购</h2></div>
+<p class="highlight">零个问题，但有一个未解除的授权门槛，部分任务保持等待。</p>
+<div class="grid"><div class="panel panel-input"><div class="label">输入 · 上级原话</div>
+<p class="quote">你看着办，今天把这几家供应商定下来，不要再问我一堆问题。</p><div class="context-label">已经知道的事</div><ul class="context"><li>现有三份报价可用于内部比较，但服务范围和交付条件尚不完全可比。</li><li>未提供采购批准记录、最终选择权限或对外确认授权。</li><li>用户目前不方便追加沟通，只需要知道可以先推进哪些工作。</li></ul></div>
+<div class="panel"><div class="label">输出 · 可以交接的工作包</div><span class="status">部分可开工，部分等待</span>
+<p class="understanding">本轮不追加问题，先整理内部比较和条件缺口。供应商最终确认及对外承诺仍等待明确授权，不能把你看着办当成采购批准。</p>
+<div class="metricrow"><span class="metric">必要问题 0 个</span><span class="metric">无外部阻塞任务 1 项</span><span class="metric">待授权门槛 1 项</span></div>
+<div class="smalltitle">先交什么</div><ul class="compact"><li>供应商内部选择建议，比较表和待批准事项。建议，未确认。</li></ul>
+<div class="smalltitle">需要确认什么</div><ul class="compact"><li>本轮不追加问题，不代表审批门槛已经解除。</li></ul>
+<div class="smalltitle">这次不做什么</div><ul class="compact"><li>不发送中标通知。</li><li>不下单、付款或签约。</li><li>不将未回复视为默认批准。</li></ul></div></div>
+<div class="reply"><div class="label">可以复制的回复草稿 · 不会自动发送</div><p>我先把现有报价按同一口径整理，列出推荐和待确认条件，本轮不再追加一串问题。最终供应商确认和对外承诺先保留在待批准项，授权明确后再推进。</p></div>
+<div class="stop"><strong>做到这里就停。</strong>内部比较和需要批准的事项已清楚即可，本 Skill 不执行外部确认。</div>
+<details><summary>查看完整工作包，包括假设、任务依赖与依据</summary><pre># heihua-skill 工作包
+
+## 我理解的任务
+
+本轮不追加问题，先整理内部比较和条件缺口。供应商最终确认及对外承诺仍等待明确授权，不能把你看着办当成采购批准。
+
+当前状态，部分可开工，部分等待确认。
+
+## 已明确的信息
+
+- 原话要求，你看着办，今天把这几家供应商定下来，不要再问我一堆问题。 依据 E1。
+- 现有三份报价可用于内部比较，但服务范围和交付条件尚不完全可比。 依据 E2。
+- 未提供采购批准记录、最终选择权限或对外确认授权。 依据 E3。
+- 用户目前不方便追加沟通，只需要知道可以先推进哪些工作。 依据 E4。
+
+## 候选解释
+
+- 暂按此推进，可以自主准备内部选择建议，但不能据此推定最终采购权限。 置信程度中等。
+  改变条件，若后续提供明确权限和批准记录，再调整受阻任务状态。
+- 保留的其他解释，原话可能希望当天确定合作方，但缺少执行所需授权。 置信程度中等。
+  改变条件，仅在授权和不可比条件消除后，才具备后续执行依据。
+
+## 默认假设
+
+- A1，暂只使用已有报价做内部比较，不主动联系供应商。
+  复核节点，收到首次反馈时复核。 退路，只调整小稿，不扩大未确认范围。
+
+## 预计交付物与验收
+
+### D1 供应商内部选择建议
+
+形式，比较表和待批准事项。建议，尚未确认。
+- 区分可以比较的报价与尚不可比的条款。
+- 保留选择权限和最终批准栏为未确认。
+- 不出现已通知中标或已承诺付款的表述。
+
+## 执行顺序
+
+### T1 整理现有报价和不可比条件。
+
+状态，可执行。依赖，无。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，比较表不把未知服务范围按相同处理。
+
+### T2 依据正式批准结果办理最终确认。
+
+状态，待确认后执行。依赖，T1。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，只有授权范围和选择结果均有依据时才能进入后续执行。
+
+## 需要确认的最少问题
+
+本轮不追加问题。不代表待审批事项已经获批。
+
+## 不能跳过的确认门槛
+
+- G1，必须取得最终选择与对外确认的明确授权，并核实不可比条件。 仍未确认，影响 T2。
+
+## 返工风险
+
+- 不追问可能被误解为所有条件都已确定。 影响，容易形成未经授权的外部承诺。 处理，零追问与执行门槛分开记录。
+
+## 本轮不做
+
+- 不发送中标通知。
+- 不下单、付款或签约。
+- 不将未回复视为默认批准。
+
+## 给上级的回复草稿
+
+我先把现有报价按同一口径整理，列出推荐和待确认条件，本轮不再追加一串问题。最终供应商确认和对外承诺先保留在待批准项，授权明确后再推进。
+
+## 做到这里就停
+
+内部比较和需要批准的事项已清楚即可，本 Skill 不执行外部确认。
+
+## 依据索引
+
+- E1，input.request
+  原文片段，你看着办，今天把这几家供应商定下来，不要再问我一堆问题。
+- E2，input.md
+  原文片段，现有三份报价可用于内部比较，但服务范围和交付条件尚不完全可比。
+- E3，input.md
+  原文片段，未提供采购批准记录、最终选择权限或对外确认授权。
+- E4，input.md
+  原文片段，用户目前不方便追加沟通，只需要知道可以先推进哪些工作。
+
+此工作包不代表负责人已批准，不会自动发送消息或执行所列任务。
+</pre></details>
+<details><summary>查看完整模拟输入</summary><pre># 你看着办，不等于可以直接采购
+
+全模拟案例，不含真实单位、个人或客户资料。
+
+## 上级原话
+
+你看着办，今天把这几家供应商定下来，不要再问我一堆问题。
+
+## 已有上下文
+
+现有三份报价可用于内部比较，但服务范围和交付条件尚不完全可比。
+
+未提供采购批准记录、最终选择权限或对外确认授权。
+
+用户目前不方便追加沟通，只需要知道可以先推进哪些工作。
+</pre></details>
+</section><section class="case" id="06-honest-presentation">
+<div class="casetop"><span class="case-number">06</span><h2>写得好看，不改事实</h2></div>
+<p class="highlight">区分改善表达与改变事实，不把迎合上级作为成功标准。</p>
+<div class="grid"><div class="panel panel-input"><div class="label">输入 · 上级原话</div>
+<p class="quote">把效果写得好看一点，让人觉得这次活动肯定有效。</p><div class="context-label">已经知道的事</div><ul class="context"><li>全模拟活动记录中，报名人数从100人增加到130人，成交人数从50人减少到48人。</li><li>没有对照组或其他能单独确认活动效果的资料，当前材料仅用于内部复盘。</li></ul></div>
+<div class="panel"><div class="label">输出 · 可以交接的工作包</div><span class="status">可先开工</span>
+<p class="understanding">可以改善真实结果的展示，不能把成交下降或证据不足改写成活动肯定有效。交付诚实的亮点、限制和改进方向。</p>
+<div class="metricrow"><span class="metric">必要问题 0 个</span><span class="metric">无外部阻塞任务 2 项</span><span class="metric">待授权门槛 0 项</span></div>
+<div class="smalltitle">先交什么</div><ul class="compact"><li>真实效果复盘摘要，一页摘要。建议，未确认。</li></ul>
+<div class="smalltitle">需要确认什么</div><ul class="compact"><li>本轮不追加问题，不代表审批门槛已经解除。</li></ul>
+<div class="smalltitle">这次不做什么</div><ul class="compact"><li>不改成交人数。</li><li>不删除成交下降。</li><li>不编造确定效果或批准记录。</li></ul></div></div>
+<div class="reply"><div class="label">可以复制的回复草稿 · 不会自动发送</div><p>我会把真实亮点和结果变化讲清楚，报名增加可以突出，但成交下降也会保留。现有资料还不能支持活动肯定有效，我会改成客观的阶段结果和后续改进建议。</p></div>
+<div class="stop"><strong>做到这里就停。</strong>真实变化、限制和改进方向能够被清楚理解即可，不用更强措辞制造确定性。</div>
+<details><summary>查看完整工作包，包括假设、任务依赖与依据</summary><pre># heihua-skill 工作包
+
+## 我理解的任务
+
+可以改善真实结果的展示，不能把成交下降或证据不足改写成活动肯定有效。交付诚实的亮点、限制和改进方向。
+
+当前状态，可先开工。
+
+## 已明确的信息
+
+- 原话要求，把效果写得好看一点，让人觉得这次活动肯定有效。 依据 E1。
+- 全模拟活动记录中，报名人数从100人增加到130人，成交人数从50人减少到48人。 依据 E2。
+- 没有对照组或其他能单独确认活动效果的资料，当前材料仅用于内部复盘。 依据 E3。
+
+## 候选解释
+
+- 暂按此推进，可接受的处理是让真实信息更易理解，同时保留不利结果。 置信程度中等。
+  改变条件，如果用户仅要排版，保持所有数字和结论强度不变。
+- 保留的其他解释，让人觉得肯定有效也可能要求夸大结论，这部分不采纳。 置信程度中等。
+  改变条件，只有新增可靠证据能支持更强结论时才调整判断。
+
+## 默认假设
+
+- A1，建议以报名改善、成交变化和待验证解释三个部分呈现。
+  复核节点，收到首次反馈时复核。 退路，只调整小稿，不扩大未确认范围。
+
+## 预计交付物与验收
+
+### D1 真实效果复盘摘要
+
+形式，一页摘要。建议，尚未确认。
+- 报名增加与成交减少同时呈现。
+- 不把缺乏对照的变化解释为确定活动效果。
+- 改进建议与实际问题对应。
+
+## 执行顺序
+
+### T1 复核并保留全部关键结果。
+
+状态，可执行。依赖，无。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，不能只留下报名增加。
+
+### T2 重写结论与展示顺序。
+
+状态，可执行。依赖，T1。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，区分观察到的变化和未证实的效果。
+
+## 需要确认的最少问题
+
+本轮不追加问题。不代表待审批事项已经获批。
+
+## 返工风险
+
+- 要求肯定有效超过现有证据。 影响，误导听众并影响后续决策。 处理，拒绝改变事实，提供真实可读的表述。
+
+## 本轮不做
+
+- 不改成交人数。
+- 不删除成交下降。
+- 不编造确定效果或批准记录。
+
+## 给上级的回复草稿
+
+我会把真实亮点和结果变化讲清楚，报名增加可以突出，但成交下降也会保留。现有资料还不能支持活动肯定有效，我会改成客观的阶段结果和后续改进建议。
+
+## 做到这里就停
+
+真实变化、限制和改进方向能够被清楚理解即可，不用更强措辞制造确定性。
+
+## 依据索引
+
+- E1，input.request
+  原文片段，把效果写得好看一点，让人觉得这次活动肯定有效。
+- E2，input.md
+  原文片段，全模拟活动记录中，报名人数从100人增加到130人，成交人数从50人减少到48人。
+- E3，input.md
+  原文片段，没有对照组或其他能单独确认活动效果的资料，当前材料仅用于内部复盘。
+
+此工作包不代表负责人已批准，不会自动发送消息或执行所列任务。
+</pre></details>
+<details><summary>查看完整模拟输入</summary><pre># 写得好看，不改事实
+
+全模拟案例，不含真实单位、个人或客户资料。
+
+## 上级原话
+
+把效果写得好看一点，让人觉得这次活动肯定有效。
+
+## 已有上下文
+
+全模拟活动记录中，报名人数从100人增加到130人，成交人数从50人减少到48人。
+
+没有对照组或其他能单独确认活动效果的资料，当前材料仅用于内部复盘。
+</pre></details>
+</section><section class="case" id="07-missing-object">
+<div class="casetop"><span class="case-number">07</span><h2>只给一句话，先确认对象</h2></div>
+<p class="highlight">只问一个对象问题，所有具体工作保持等待。</p>
+<div class="grid"><div class="panel panel-input"><div class="label">输入 · 上级原话</div>
+<p class="quote">这个东西再完善一下。</p><div class="context-label">已经知道的事</div><ul class="context"><li>没有说明对象，也没有提供材料。</li></ul></div>
+<div class="panel"><div class="label">输出 · 可以交接的工作包</div><span class="status">先确认对象或前提</span>
+<p class="understanding">目前只能确定这是修改请求，无法识别要修改的材料或任务。先确认对象，不编造项目背景和完整执行计划。</p>
+<div class="metricrow"><span class="metric">必要问题 1 个</span><span class="metric">无外部阻塞任务 0 项</span><span class="metric">待授权门槛 0 项</span></div>
+<div class="smalltitle">先交什么</div><ul class="compact"><li>对象确认后的修改范围说明，对象明确后再确定载体。建议，未确认。</li></ul>
+<div class="smalltitle">需要确认什么</div><ul class="compact"><li>这里指的是哪份材料或哪项任务，可以把现有内容发来或指出位置。</li></ul>
+<div class="smalltitle">这次不做什么</div><ul class="compact"><li>不猜测行业和材料主题。</li><li>不承诺具体格式、页数和交期。</li></ul></div></div>
+<div class="reply"><div class="label">可以复制的回复草稿 · 不会自动发送</div><p>可以，先把要修改的材料发来，或指出具体是哪项任务。我先看已有内容，再确定需要补什么。</p></div>
+<div class="stop"><strong>做到这里就停。</strong>本轮只需明确对象，不在信息缺失时生成无效长计划。</div>
+<details><summary>查看完整工作包，包括假设、任务依赖与依据</summary><pre># heihua-skill 工作包
+
+## 我理解的任务
+
+目前只能确定这是修改请求，无法识别要修改的材料或任务。先确认对象，不编造项目背景和完整执行计划。
+
+当前状态，暂不能开工。
+
+## 已明确的信息
+
+- 原话要求，这个东西再完善一下。 依据 E1。
+
+## 候选解释
+
+- 暂按此推进，需要先获得被修改的对象，才能判断具体缺口。 置信程度较低。
+  改变条件，拿到材料或定位到任务后，再形成具体修改范围。
+
+## 默认假设
+
+不需要新增可逆假设。
+
+## 预计交付物与验收
+
+### D1 对象确认后的修改范围说明
+
+形式，对象明确后再确定载体。建议，尚未确认。
+- 先明确实际要修改的材料或任务。
+- 未拿到对象前不假设报告主题、行业和格式。
+
+## 执行顺序
+
+### T1 读取待修改对象并界定修改范围。
+
+状态，待确认后执行。依赖，无。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，先获得可识别的材料或任务。
+
+## 需要确认的最少问题
+
+- Q1，这里指的是哪份材料或哪项任务，可以把现有内容发来或指出位置。
+  为什么问，对象不明会导致整份方案建立在虚构背景上。
+  答案会改变，决定检查什么和交付什么。
+  暂无回复时，暂不编造方案，等待对象信息。
+
+## 返工风险
+
+- 指代对象缺失。 影响，可能为不存在的任务生成长方案。 处理，只问对象，不顺手追加受众、预算等问题。
+
+## 本轮不做
+
+- 不猜测行业和材料主题。
+- 不承诺具体格式、页数和交期。
+
+## 给上级的回复草稿
+
+可以，先把要修改的材料发来，或指出具体是哪项任务。我先看已有内容，再确定需要补什么。
+
+## 做到这里就停
+
+本轮只需明确对象，不在信息缺失时生成无效长计划。
+
+## 依据索引
+
+- E1，input.request
+  原文片段，这个东西再完善一下。
+
+此工作包不代表负责人已批准，不会自动发送消息或执行所列任务。
+</pre></details>
+<details><summary>查看完整模拟输入</summary><pre># 只给一句话，先确认对象
+
+全模拟案例，不含真实单位、个人或客户资料。
+
+## 上级原话
+
+这个东西再完善一下。
+
+## 已有上下文
+
+没有其他材料，也未说明这个东西具体是什么。
+</pre></details>
+</section><section class="case" id="08-impossible-scope">
+<div class="casetop"><span class="case-number">08</span><h2>时限与范围冲突，先给取舍</h2></div>
+<p class="highlight">不因紧急或不想追问而许诺不可能验证的交付。</p>
+<div class="grid"><div class="panel panel-input"><div class="label">输入 · 上级原话</div>
+<p class="quote">明早9点交一份完整报告，把20个部门都访谈一遍，结论要扎实，别来回确认。</p><div class="context-label">已经知道的事</div><ul class="context"><li>这是固定历史时间的模拟场景，收到任务时为2026年9月10日16点，用户当日剩余可投入时间为2小时。</li><li>当前没有访谈记录，20个部门的访谈尚未预约，也未取得参与确认。</li><li>已有的只有一份部门名单和报告目录模板。</li></ul></div>
+<div class="panel"><div class="label">输出 · 可以交接的工作包</div><span class="status">部分可开工，部分等待</span>
+<p class="understanding">当前资源不足以保证明早9点完成20部门访谈后的完整报告。先准备可交的现状与资料缺口稿，把范围与时限的取舍留给负责人，不虚构访谈结果。</p>
+<div class="metricrow"><span class="metric">必要问题 1 个</span><span class="metric">无外部阻塞任务 1 项</span><span class="metric">待授权门槛 0 项</span></div>
+<div class="smalltitle">先交什么</div><ul class="compact"><li>分阶段交付建议及首批材料，现状稿与缺口清单。建议，未确认。</li></ul>
+<div class="smalltitle">需要确认什么</div><ul class="compact"><li>是否先在明早9点交现状与缺口稿，再另定完整访谈报告节点。</li></ul>
+<div class="smalltitle">这次不做什么</div><ul class="compact"><li>不虚构20部门访谈。</li><li>不保证未经验证的交付可行性。</li><li>不把建议的减范围当作已批准。</li></ul></div></div>
+<div class="reply"><div class="label">可以复制的回复草稿 · 不会自动发送</div><p>目前20个部门的访谈还未预约，当日可投入时间为2小时，无法保证明早9点交出完成全部访谈的报告。我先把现状和缺口整理出来。是否先按这个范围交首版，再确定完整访谈报告的节点。</p></div>
+<div class="stop"><strong>做到这里就停。</strong>可交内容和无法保证的范围已透明说明，等待取舍，不用虚构材料填满报告。</div>
+<details><summary>查看完整工作包，包括假设、任务依赖与依据</summary><pre># heihua-skill 工作包
+
+## 我理解的任务
+
+当前资源不足以保证明早9点完成20部门访谈后的完整报告。先准备可交的现状与资料缺口稿，把范围与时限的取舍留给负责人，不虚构访谈结果。
+
+当前状态，部分可开工，部分等待确认。
+
+## 已明确的信息
+
+- 原话要求，明早9点交一份完整报告，把20个部门都访谈一遍，结论要扎实，别来回确认。 依据 E1。
+- 这是固定历史时间的模拟场景，收到任务时为2026年9月10日16点，用户当日剩余可投入时间为2小时。 依据 E2。
+- 当前没有访谈记录，20个部门的访谈尚未预约，也未取得参与确认。 依据 E3。
+- 已有的只有一份部门名单和报告目录模板。 依据 E4。
+
+## 候选解释
+
+- 暂按此推进，需要将明早可交部分与完整访谈报告拆开。 置信程度中等。
+  改变条件，如果实际已有可用访谈记录或新增已确认资源，应重新评估交付范围。
+- 保留的其他解释，也可能希望先给完整结构而非完整实证，但原话尚未确认这种减范围。 置信程度中等。
+  改变条件，只有收到确认后，才能将目录稿视为满足完整报告要求。
+
+## 默认假设
+
+- A1，先用现有名单和模板形成资料清单，不冒充完整访谈报告。
+  复核节点，收到首次反馈时复核。 退路，只调整小稿，不扩大未确认范围。
+
+## 预计交付物与验收
+
+### D1 分阶段交付建议及首批材料
+
+形式，现状稿与缺口清单。建议，尚未确认。
+- 区分现有材料和未完成访谈。
+- 指出明早交付与完整范围不能同时保证。
+- 取舍方案明确标为建议，不能擅自变更原任务。
+
+## 执行顺序
+
+### T1 整理现有材料和20部门待访谈清单。
+
+状态，可执行。依赖，无。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，不生成假访谈内容。
+
+### T2 按负责人确认的范围完善正式报告。
+
+状态，待确认后执行。依赖，T1。对应交付物，D1。
+时间安排，建议先完成此步，不承诺未经确认的工时。
+- 验收，时限或范围取舍已明确，资料达到相应标准。
+
+## 需要确认的最少问题
+
+- Q1，是否先在明早9点交现状与缺口稿，再另定完整访谈报告节点。
+  为什么问，当前未预约访谈且仅有2小时投入，不能保证原范围按期完成。
+  答案会改变，决定优先保时间还是保完整范围。
+  暂无回复时，先整理已有材料，不把缺口稿冒称完整报告。
+
+## 返工风险
+
+- 把完整报告写成按期可交承诺。 影响，可能产生虚构访谈或暗中缩减范围。 处理，明确任务冲突，提出分阶段建议。
+
+## 本轮不做
+
+- 不虚构20部门访谈。
+- 不保证未经验证的交付可行性。
+- 不把建议的减范围当作已批准。
+
+## 给上级的回复草稿
+
+目前20个部门的访谈还未预约，当日可投入时间为2小时，无法保证明早9点交出完成全部访谈的报告。我先把现状和缺口整理出来。是否先按这个范围交首版，再确定完整访谈报告的节点。
+
+## 做到这里就停
+
+可交内容和无法保证的范围已透明说明，等待取舍，不用虚构材料填满报告。
+
+## 依据索引
+
+- E1，input.request
+  原文片段，明早9点交一份完整报告，把20个部门都访谈一遍，结论要扎实，别来回确认。
+- E2，input.md
+  原文片段，这是固定历史时间的模拟场景，收到任务时为2026年9月10日16点，用户当日剩余可投入时间为2小时。
+- E3，input.md
+  原文片段，当前没有访谈记录，20个部门的访谈尚未预约，也未取得参与确认。
+- E4，input.md
+  原文片段，已有的只有一份部门名单和报告目录模板。
+
+此工作包不代表负责人已批准，不会自动发送消息或执行所列任务。
+</pre></details>
+<details><summary>查看完整模拟输入</summary><pre># 时限与范围冲突，先给取舍
+
+全模拟案例，不含真实单位、个人或客户资料。
+
+## 上级原话
+
+明早9点交一份完整报告，把20个部门都访谈一遍，结论要扎实，别来回确认。
+
+## 已有上下文
+
+这是固定历史时间的模拟场景，收到任务时为2026年9月10日16点，用户当日剩余可投入时间为2小时。
+
+当前没有访谈记录，20个部门的访谈尚未预约，也未取得参与确认。
+
+已有的只有一份部门名单和报告目录模板。
+</pre></details>
+</section><footer>实际使用时由宿主模型读取 SKILL.md 和真实授权材料后生成工作包。校验通过不等于意图判断正确，工作包也不是执行授权。</footer></main></body></html>

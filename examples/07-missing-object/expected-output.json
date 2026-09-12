@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "request": "这个东西再完善一下。",
+  "task_understanding": "目前只能确定这是修改请求，无法识别要修改的材料或任务。先确认对象，不编造项目背景和完整执行计划。",
+  "execution_status": "blocked",
+  "evidence": [
+    {
+      "id": "E1",
+      "source": "input.request",
+      "quote": "这个东西再完善一下。"
+    }
+  ],
+  "facts": [
+    {
+      "text": "原话要求，这个东西再完善一下。",
+      "evidence_ids": [
+        "E1"
+      ]
+    }
+  ],
+  "interpretations": [
+    {
+      "meaning": "需要先获得被修改的对象，才能判断具体缺口。",
+      "confidence": "low",
+      "evidence_ids": [
+        "E1"
+      ],
+      "selected": true,
+      "would_change": "拿到材料或定位到任务后，再形成具体修改范围。"
+    }
+  ],
+  "assumptions": [],
+  "question_policy": {
+    "budget": 2,
+    "exception_reason": ""
+  },
+  "clarifications": [
+    {
+      "id": "Q1",
+      "question": "这里指的是哪份材料或哪项任务，可以把现有内容发来或指出位置。",
+      "why_needed": "对象不明会导致整份方案建立在虚构背景上。",
+      "changes": "决定检查什么和交付什么。",
+      "if_no_answer": "暂不编造方案，等待对象信息。",
+      "blocks": [
+        "T1"
+      ]
+    }
+  ],
+  "deliverables": [
+    {
+      "id": "D1",
+      "name": "对象确认后的修改范围说明",
+      "format": "对象明确后再确定载体",
+      "status": "proposed",
+      "evidence_ids": [],
+      "acceptance": [
+        "先明确实际要修改的材料或任务。",
+        "未拿到对象前不假设报告主题、行业和格式。"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T1",
+      "action": "读取待修改对象并界定修改范围。",
+      "deliverable_id": "D1",
+      "depends_on": [],
+      "state": "waiting",
+      "acceptance": [
+        "先获得可识别的材料或任务。"
+      ],
+      "timebox": "建议先完成此步，不承诺未经确认的工时。"
+    }
+  ],
+  "approval_gates": [],
+  "risks": [
+    {
+      "risk": "指代对象缺失。",
+      "impact": "可能为不存在的任务生成长方案。",
+      "mitigation": "只问对象，不顺手追加受众、预算等问题。",
+      "evidence_ids": []
+    }
+  ],
+  "out_of_scope": [
+    "不猜测行业和材料主题。",
+    "不承诺具体格式、页数和交期。"
+  ],
+  "reply_draft": "可以，先把要修改的材料发来，或指出具体是哪项任务。我先看已有内容，再确定需要补什么。",
+  "stop_condition": "本轮只需明确对象，不在信息缺失时生成无效长计划。"
+}

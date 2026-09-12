@@ -1,0 +1,82 @@
+[
+  {
+    "id": "01-report-ready",
+    "title": "把能汇报转换成决策材料",
+    "input": "01-report-ready/input.md",
+    "reference_output": "01-report-ready/expected-output.json",
+    "highlight": "已有上下文足够，本轮零追问。页数是建议，扩大试点没有被当成已获批。",
+    "provenance": "synthetic-reference-authored-for-this-release",
+    "live_model_run": false,
+    "input_sha256": "a386e7571a7fa5a2c55810d30e83f8ec6a45e6cdfaf5f9daf6cc5326180be101"
+  },
+  {
+    "id": "02-fast-proposal",
+    "title": "尽快不自动变成今晚交付",
+    "input": "02-fast-proposal/input.md",
+    "reference_output": "02-fast-proposal/expected-output.json",
+    "highlight": "一个方向问题，准备工作不中断，正式流程等待对象确认。",
+    "provenance": "synthetic-reference-authored-for-this-release",
+    "live_model_run": false,
+    "input_sha256": "f781bfbdcfc42216424c677a50b223c8dfb83084926a63cbe994f168677bc448"
+  },
+  {
+    "id": "03-deeper-analysis",
+    "title": "同一句深入，先查转化环节",
+    "input": "03-deeper-analysis/input.md",
+    "reference_output": "03-deeper-analysis/expected-output.json",
+    "highlight": "同一句再深入一点，缺口是分析口径。脚本可独立复核这里的示例算术。",
+    "provenance": "synthetic-reference-authored-for-this-release",
+    "live_model_run": false,
+    "input_sha256": "e352227644aa6846b0ff7e80ccec347f43673c869a0014718856269a517b4f29"
+  },
+  {
+    "id": "04-deeper-decision",
+    "title": "同一句深入，不再增加图表",
+    "input": "04-deeper-decision/input.md",
+    "reference_output": "04-deeper-decision/expected-output.json",
+    "highlight": "与上个案例的原话完全相同，交付从漏斗核对变为行动比较。",
+    "provenance": "synthetic-reference-authored-for-this-release",
+    "live_model_run": false,
+    "input_sha256": "8485ebb2f2cdd2a74210bd3ee0338b1d188fe6e8079a7de8ab55a7f1e04f5a88"
+  },
+  {
+    "id": "05-approval-boundary",
+    "title": "你看着办，不等于可以直接采购",
+    "input": "05-approval-boundary/input.md",
+    "reference_output": "05-approval-boundary/expected-output.json",
+    "highlight": "零个问题，但有一个未解除的授权门槛，部分任务保持等待。",
+    "provenance": "synthetic-reference-authored-for-this-release",
+    "live_model_run": false,
+    "input_sha256": "6f0afdd34a1c4fd4c6dccb7308be3753bd55337a46d6ea9c89bc7d2743e1c26e"
+  },
+  {
+    "id": "06-honest-presentation",
+    "title": "写得好看，不改事实",
+    "input": "06-honest-presentation/input.md",
+    "reference_output": "06-honest-presentation/expected-output.json",
+    "highlight": "区分改善表达与改变事实，不把迎合上级作为成功标准。",
+    "provenance": "synthetic-reference-authored-for-this-release",
+    "live_model_run": false,
+    "input_sha256": "02c15535ab8ccb4056e5b0a29877394240c251922b34379bd6619dad20004d2d"
+  },
+  {
+    "id": "07-missing-object",
+    "title": "只给一句话，先确认对象",
+    "input": "07-missing-object/input.md",
+    "reference_output": "07-missing-object/expected-output.json",
+    "highlight": "只问一个对象问题，所有具体工作保持等待。",
+    "provenance": "synthetic-reference-authored-for-this-release",
+    "live_model_run": false,
+    "input_sha256": "65fbd9323b325a340eb1b6b75d68b5d0cc4baa3bc64370bdb291a931b35acfd0"
+  },
+  {
+    "id": "08-impossible-scope",
+    "title": "时限与范围冲突，先给取舍",
+    "input": "08-impossible-scope/input.md",
+    "reference_output": "08-impossible-scope/expected-output.json",
+    "highlight": "不因紧急或不想追问而许诺不可能验证的交付。",
+    "provenance": "synthetic-reference-authored-for-this-release",
+    "live_model_run": false,
+    "input_sha256": "bfd84f1392ee644be53819f19b014f495900170867528f384cb6ee02d3b861bd"
+  }
+]

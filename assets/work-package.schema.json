@@ -1,0 +1,461 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "heihua-skill work package 1.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "request": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_understanding": {
+      "type": "string",
+      "minLength": 1
+    },
+    "execution_status": {
+      "type": "string",
+      "enum": [
+        "ready",
+        "partial",
+        "blocked"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^E[1-9][0-9]*$"
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "quote": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "source",
+          "quote"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^E[1-9][0-9]*$"
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "text",
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "interpretations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "meaning": {
+            "type": "string",
+            "minLength": 1
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^E[1-9][0-9]*$"
+            },
+            "minItems": 0
+          },
+          "selected": {
+            "type": "boolean"
+          },
+          "would_change": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "meaning",
+          "confidence",
+          "evidence_ids",
+          "selected",
+          "would_change"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^A[1-9][0-9]*$"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "risk": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "reversible": {
+            "type": "boolean"
+          },
+          "check_at": {
+            "type": "string",
+            "minLength": 1
+          },
+          "fallback": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "risk",
+          "reversible",
+          "check_at",
+          "fallback"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "question_policy": {
+      "type": "object",
+      "properties": {
+        "budget": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "exception_reason": {
+          "type": "string",
+          "minLength": 0
+        }
+      },
+      "required": [
+        "budget",
+        "exception_reason"
+      ],
+      "additionalProperties": false
+    },
+    "clarifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^Q[1-9][0-9]*$"
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1
+          },
+          "why_needed": {
+            "type": "string",
+            "minLength": 1
+          },
+          "changes": {
+            "type": "string",
+            "minLength": 1
+          },
+          "if_no_answer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "blocks": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^T[1-9][0-9]*$"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "id",
+          "question",
+          "why_needed",
+          "changes",
+          "if_no_answer",
+          "blocks"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "deliverables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^D[1-9][0-9]*$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "format": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "proposed",
+              "confirmed"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^E[1-9][0-9]*$"
+            },
+            "minItems": 0
+          },
+          "acceptance": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "format",
+          "status",
+          "evidence_ids",
+          "acceptance"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^T[1-9][0-9]*$"
+          },
+          "action": {
+            "type": "string",
+            "minLength": 1
+          },
+          "deliverable_id": {
+            "type": "string",
+            "pattern": "^D[1-9][0-9]*$"
+          },
+          "depends_on": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^T[1-9][0-9]*$"
+            },
+            "minItems": 0
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "ready",
+              "waiting"
+            ]
+          },
+          "acceptance": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "timebox": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "action",
+          "deliverable_id",
+          "depends_on",
+          "state",
+          "acceptance",
+          "timebox"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "approval_gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^G[1-9][0-9]*$"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "confirmed": {
+            "type": "boolean"
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^E[1-9][0-9]*$"
+            },
+            "minItems": 0
+          },
+          "blocks": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^T[1-9][0-9]*$"
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "id",
+          "reason",
+          "confirmed",
+          "evidence_ids",
+          "blocks"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "risk": {
+            "type": "string",
+            "minLength": 1
+          },
+          "impact": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mitigation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^E[1-9][0-9]*$"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "risk",
+          "impact",
+          "mitigation",
+          "evidence_ids"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "out_of_scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "reply_draft": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stop_condition": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "request",
+    "task_understanding",
+    "execution_status",
+    "evidence",
+    "facts",
+    "interpretations",
+    "assumptions",
+    "question_policy",
+    "clarifications",
+    "deliverables",
+    "tasks",
+    "approval_gates",
+    "risks",
+    "out_of_scope",
+    "reply_draft",
+    "stop_condition"
+  ],
+  "additionalProperties": false
+}

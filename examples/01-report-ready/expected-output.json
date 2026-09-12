@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.0",
+  "request": "这个方案你再完善一下，周五给我一个能汇报的版本。别铺太大，先把重点抓出来。",
+  "task_understanding": "沿用已有数据，补两种试点范围的比较和建议，形成服务周五例会的内部汇报材料，不把完善理解为继续加背景或已经获批扩张。",
+  "execution_status": "ready",
+  "evidence": [
+    {
+      "id": "E1",
+      "source": "input.request",
+      "quote": "这个方案你再完善一下，周五给我一个能汇报的版本。别铺太大，先把重点抓出来。"
+    },
+    {
+      "id": "E2",
+      "source": "input.md",
+      "quote": "周五是内部运营例会，本次发言安排为10分钟。"
+    },
+    {
+      "id": "E3",
+      "source": "input.md",
+      "quote": "会议需要决定，下个月把试点从2个门店扩大到5个门店，还是继续保留2个门店。"
+    },
+    {
+      "id": "E4",
+      "source": "input.md",
+      "quote": "已有12页方案，包含背景、执行经过和逐店数据，缺少两种选择的比较与建议。"
+    },
+    {
+      "id": "E5",
+      "source": "input.md",
+      "quote": "原方案仍是讨论稿，没有扩大试点的批准记录。"
+    }
+  ],
+  "facts": [
+    {
+      "text": "原话要求，这个方案你再完善一下，周五给我一个能汇报的版本。别铺太大，先把重点抓出来。",
+      "evidence_ids": [
+        "E1"
+      ]
+    },
+    {
+      "text": "周五是内部运营例会，本次发言安排为10分钟。",
+      "evidence_ids": [
+        "E2"
+      ]
+    },
+    {
+      "text": "会议需要决定，下个月把试点从2个门店扩大到5个门店，还是继续保留2个门店。",
+      "evidence_ids": [
+        "E3"
+      ]
+    },
+    {
+      "text": "已有12页方案，包含背景、执行经过和逐店数据，缺少两种选择的比较与建议。",
+      "evidence_ids": [
+        "E4"
+      ]
+    },
+    {
+      "text": "原方案仍是讨论稿，没有扩大试点的批准记录。",
+      "evidence_ids": [
+        "E5"
+      ]
+    }
+  ],
+  "interpretations": [
+    {
+      "meaning": "优先补决策比较，而不是把12页继续写长。",
+      "confidence": "medium",
+      "evidence_ids": [
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "selected": true,
+      "would_change": "若会议改为单纯进度同步，应改成进展与问题汇总。"
+    },
+    {
+      "meaning": "也可能只要求改善表达，但现稿明确缺少决策比较。",
+      "confidence": "medium",
+      "evidence_ids": [
+        "E4"
+      ],
+      "selected": false,
+      "would_change": "只有收到仅改排版的明确反馈才只做表达修改。"
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "A1",
+      "text": "建议压成5页左右并保留附件，这是建议页数，不是上级已提出的要求。",
+      "risk": "low",
+      "reversible": true,
+      "check_at": "收到首次反馈时复核。",
+      "fallback": "若需沿用12页模板，只调整内容顺序。"
+    }
+  ],
+  "question_policy": {
+    "budget": 2,
+    "exception_reason": ""
+  },
+  "clarifications": [],
+  "deliverables": [
+    {
+      "id": "D1",
+      "name": "试点范围决策汇报稿",
+      "format": "沿用原幻灯片，建议5页左右加附件",
+      "status": "proposed",
+      "evidence_ids": [],
+      "acceptance": [
+        "开头说明本次需要决定的事项。",
+        "比较继续2店与扩大5店的证据、资源缺口和风险。",
+        "给出有条件的建议，未获批事项明确标为待决定。",
+        "所有关键数字能找到已有逐店数据来源。"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T1",
+      "action": "核对现稿与逐店数据中的关键口径。",
+      "deliverable_id": "D1",
+      "depends_on": [],
+      "state": "ready",
+      "acceptance": [
+        "重点数字和来源一一对应。"
+      ],
+      "timebox": "建议先完成此步，不承诺未经确认的工时。"
+    },
+    {
+      "id": "T2",
+      "action": "补充2店与5店的选择比较。",
+      "deliverable_id": "D1",
+      "depends_on": [
+        "T1"
+      ],
+      "state": "ready",
+      "acceptance": [
+        "比较使用相同维度，不编造新增资源与预期收益。"
+      ],
+      "timebox": "建议先完成此步，不承诺未经确认的工时。"
+    },
+    {
+      "id": "T3",
+      "action": "重排汇报主线并保留必要附件。",
+      "deliverable_id": "D1",
+      "depends_on": [
+        "T2"
+      ],
+      "state": "ready",
+      "acceptance": [
+        "10分钟内能讲清要决定什么，页数仍标为建议。"
+      ],
+      "timebox": "建议先完成此步，不承诺未经确认的工时。"
+    }
+  ],
+  "approval_gates": [],
+  "risks": [
+    {
+      "risk": "再完善不代表现有方案已经获批。",
+      "impact": "可能误把讨论稿变为执行通知。",
+      "mitigation": "只交决策稿，不宣布扩大试点。",
+      "evidence_ids": [
+        "E5"
+      ]
+    }
+  ],
+  "out_of_scope": [
+    "不增加没有决策用途的行业背景。",
+    "不重新收集全量数据。",
+    "不对外宣布扩大门店，也不代发汇报材料。"
+  ],
+  "reply_draft": "我会沿用现有数据，重点补上继续2店和扩大5店的比较与建议，把材料改成便于周五例会讨论的版本。页数先适当压缩，详细数据保留在附件，扩大试点仍作为待决定事项。",
+  "stop_condition": "材料已经能让例会在两种范围之间作出判断，关键依据和限制清楚，即停止扩写。"
+}
